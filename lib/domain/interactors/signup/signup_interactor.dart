@@ -1,7 +1,7 @@
 import 'package:nutri_glow/domain/entities/user/user.dart';
 import 'package:nutri_glow/domain/entities/user/user_gateway.dart';
 import 'package:nutri_glow/domain/entities/user/user_mapper.dart';
-import 'package:nutri_glow/domain/interactors/signup_boundary.dart';
+import 'package:nutri_glow/domain/interactors/signup/signup_boundary.dart';
 import 'package:nutri_glow/domain/service/auth_service.dart';
 
 class SignUpInteractor implements SignUpBoundary{

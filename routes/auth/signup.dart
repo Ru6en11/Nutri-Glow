@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
 import 'package:nutri_glow/domain/entities/user/user_gateway.dart';
-import 'package:nutri_glow/domain/interactors/signup_interactor.dart';
+import 'package:nutri_glow/domain/interactors/signup/signup_interactor.dart';
 import 'package:nutri_glow/domain/service/auth_service.dart';
 
 Future<Response> onRequest(RequestContext context) async {
@@ -15,7 +15,7 @@ Future<Response> onRequest(RequestContext context) async {
 }
 
 Future<Response> _onPost(RequestContext context) async {
-  final Map<String, dynamic> body = await context.request.json() as Map<String, dynamic>;
+  final Map<String, dynamic> body = (await context.request.json()) as Map<String, dynamic>;
   final String? login = body['login'] as String?;
   final String? password = body['password'] as String?;
 

@@ -11,8 +11,8 @@ class MockUserGateway implements UserGateway {
   User findOneById(String id) {
     return User(
       id: '1',
-      login: 'mock_login',
-      password: 'mock_password',
+      login: 'login',
+      password: 'password',
     );
   }
 

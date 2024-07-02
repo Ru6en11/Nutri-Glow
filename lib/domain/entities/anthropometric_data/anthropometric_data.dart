@@ -1,6 +1,6 @@
 class AnthropometricData {
   final String userId;
-  final String gender;
+  final Gender gender;
   final int age;
   final int weight;
   final int height;
@@ -16,6 +16,20 @@ class AnthropometricData {
     required this.activityLevel,
     required this.goal,
   });
+}
+
+enum Gender {
+  male,
+  female,
+}
+
+extension GenderExt on Gender {
+  String asString() {
+    final String enumString = this.toString();
+    final String value = enumString.split('.').last;
+
+    return value;
+  }
 }
 
 enum ActivityLevel {

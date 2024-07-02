@@ -3,6 +3,6 @@ import 'package:nutri_glow/domain/entities/anthropometric_data/anthropometric_da
 
 abstract class CalorieIntakeBoundary {
 
-    Map<String, dynamic> execute(AnthropometricData data);
+    Map<String, dynamic> execute(String userId);
 
 }

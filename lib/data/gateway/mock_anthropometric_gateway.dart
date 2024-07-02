@@ -6,7 +6,7 @@ class MockAnthropometricGateway implements AnthropometricGateway {
   AnthropometricData findOneByUserId(String userId) {
     return AnthropometricData(
       userId: "1",
-      gender: "male",
+      gender: Gender.male,
       age: 20,
       weight: 78,
       height: 176,

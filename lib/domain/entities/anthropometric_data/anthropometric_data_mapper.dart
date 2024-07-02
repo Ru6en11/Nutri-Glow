@@ -9,8 +9,8 @@ abstract class AnthropometricDataMapper {
         age: json["age"] as int,
         weight: json["weight"] as int,
         height: json["height"] as int,
-        activityLevel: json["activity_level"] as String,
-        goal: json["goal"] as String,
+        activityLevel: _parseActivityLevelFromString(json["activity_level"] as String),
+        goal: _parseGoalFromString(json["goal"] as String),
       );
 
   static Map<String, dynamic> toJson(AnthropometricData data) =>
@@ -23,4 +23,20 @@ abstract class AnthropometricDataMapper {
         "activity_level": data.activityLevel,
         "goal": data.goal,
       };
+    
+  static ActivityLevel _parseActivityLevelFromString(String parsedValue) {
+    for (final value in ActivityLevel.values) {
+      if (parsedValue == value.asString()) return value;
+    }
+
+    throw Exception('Parse Error!');
+  }
+
+  static Goal _parseGoalFromString(String parsedString) {
+    for (final value in Goal.values) {
+      if (parsedString == value.asString()) return value;
+    }
+
+    throw Exception('Parse Error!');
+  }
 }

@@ -5,7 +5,7 @@ class AnthropometricData {
   final int weight;
   final int height;
   final ActivityLevel activityLevel;
-  final String goal;
+  final Goal goal;
 
   const AnthropometricData({
     required this.userId,
@@ -37,7 +37,7 @@ extension ActivityLevelExt on ActivityLevel {
 
   String asString() {
     final String enumAsString = this.toString();
-    final String value = enumAsString.split('.')[1];
+    final String value = enumAsString.split('.').last;
     final List<String> valueParts = value.split(RegExp(r'[A-Z]'));
     final String valuePartsWithSnakeCase = valueParts.join('_');
 
@@ -58,5 +58,11 @@ extension GoalExt on Goal {
     Goal.gain => 1.2,
   };
 
+  String asString() {
+    final String enumAsString = this.toString();
+    final String value = enumAsString.split('.').last;
+    
+    return value;
+  }
 
 }

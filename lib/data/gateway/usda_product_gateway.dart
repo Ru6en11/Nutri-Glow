@@ -51,7 +51,7 @@ class UsdaProductGateway implements ProductGateway {
       }
     }
 
-    final p = Product(
+    final product = Product(
       name: name,
       calories: calories,
       protein: protein,
@@ -59,6 +59,6 @@ class UsdaProductGateway implements ProductGateway {
       carbohydrate: carbohydrate,
     );
 
-    return p;
+    return product;
   }
 }

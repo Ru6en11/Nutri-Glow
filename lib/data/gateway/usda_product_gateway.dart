@@ -58,8 +58,6 @@ class UsdaProductGateway implements ProductGateway {
       fat: fat,
       carbohydrate: carbohydrate,
     );
-    print("----------");
-    print("name: ${p.name}, calories: ${p.calories}, prot: ${p.protein}, fat: ${p.fat}, carb: ${p.carbohydrate}");
 
     return p;
   }

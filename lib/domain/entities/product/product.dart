@@ -20,6 +20,7 @@ class Product {
       protein: protein * multiplier,
       fat: fat * multiplier,
       carbohydrate: carbohydrate * multiplier,
+      weight: weight * multiplier,
     );
   }
 
@@ -29,6 +30,7 @@ class Product {
       protein: protein / multiplier,
       fat: fat / multiplier,
       carbohydrate: carbohydrate / multiplier,
+      weight: weight / multiplier,
     );
   }
 }

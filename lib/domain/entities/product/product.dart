@@ -1,6 +1,7 @@
 
 class Product {
   final String name;
+  final double calories;
   final double protein;
   final double fat;
   final double carbohydrate;
@@ -8,6 +9,7 @@ class Product {
 
   const Product({
     required this.name,
+    required this.calories,
     required this.protein,
     required this.fat,
     required this.carbohydrate,
@@ -17,6 +19,7 @@ class Product {
   Product operator *(double multiplier) {
     return Product(
       name: name,
+      calories: calories * multiplier,
       protein: protein * multiplier,
       fat: fat * multiplier,
       carbohydrate: carbohydrate * multiplier,
@@ -27,6 +30,7 @@ class Product {
   Product operator /(double multiplier) {
     return Product(
       name: name,
+      calories: calories / multiplier,
       protein: protein / multiplier,
       fat: fat / multiplier,
       carbohydrate: carbohydrate / multiplier,

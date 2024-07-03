@@ -6,5 +6,6 @@ abstract class ProductMapper {
         "protein": product.protein,
         "fat": product.fat,
         "carb": product.carbohydrate,
+        "weight": product.weight,
       };
 }

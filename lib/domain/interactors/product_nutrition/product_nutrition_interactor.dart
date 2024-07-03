@@ -16,7 +16,7 @@ class ProductNutritionInteractor implements ProductNutritionBoundary {
 
     final int multiply = productWeight ?? _defaultProductWeight; 
 
-    final Product productByWeight = product / 100 * multiply.toDouble();
+    final Product productByWeight = product / product.weight * multiply.toDouble();
 
     return ProductMapper.toJson(productByWeight);
   }

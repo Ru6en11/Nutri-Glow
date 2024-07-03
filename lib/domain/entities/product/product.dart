@@ -4,12 +4,14 @@ class Product {
   final double protein;
   final double fat;
   final double carbohydrate;
+  final double weight;
 
   const Product({
     required this.name,
     required this.protein,
     required this.fat,
     required this.carbohydrate,
+    this.weight = 100,
   });
 
   Product operator *(double multiplier) {

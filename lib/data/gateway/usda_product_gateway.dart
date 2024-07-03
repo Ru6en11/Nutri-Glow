@@ -33,26 +33,34 @@ class UsdaProductGateway implements ProductGateway {
     double protein = 0.0;
     double fat = 0.0;
     double carbohydrate = 0.0;
+    double calories = 0.0;
 
     for (final nutrient in food['foodNutrients']) {
       switch (nutrient['nutrientName']) {
         case 'Protein':
-          protein = nutrient['value'];
+          protein = (nutrient['value'] as num).toDouble();
           break;
         case 'Total lipid (fat)':
-          fat = nutrient['value'];
+          fat = (nutrient['value'] as num).toDouble();
           break;
         case 'Carbohydrate, by difference':
-          carbohydrate = nutrient['value'];
+          carbohydrate = (nutrient['value'] as num).toDouble();
           break;
+        case 'Energy':
+          calories = (nutrient['value'] as num).toDouble();
       }
     }
 
-    return Product(
+    final p = Product(
       name: name,
+      calories: calories,
       protein: protein,
       fat: fat,
       carbohydrate: carbohydrate,
     );
+    print("----------");
+    print("name: ${p.name}, calories: ${p.calories}, prot: ${p.protein}, fat: ${p.fat}, carb: ${p.carbohydrate}");
+
+    return p;
   }
 }

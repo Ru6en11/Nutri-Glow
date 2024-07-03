@@ -5,4 +5,6 @@ abstract class ProductGateway {
 
   Future<Product> findOneByName(String productName); 
 
+  Future<List<Product>> findSomeByNutrient(String nutrient, double amount);
+
 }

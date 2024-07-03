@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -60,5 +61,53 @@ class UsdaProductGateway implements ProductGateway {
     );
 
     return product;
+  }
+
+  @override
+  Future<List<Product>> findSomeByNutrient(String nutrient, double amount) async {
+    final Uri url = Uri.parse(
+      "$_usdaBaseUrl/foods/list?api_key=$_usdaKey&pageSize=10",
+    );
+
+    final http.Response response = await http.get(url);
+
+    if (response.statusCode != HttpStatus.ok) {
+      throw Exception("Failed to fetch data from USDA");
+    }
+
+    final List<dynamic> foods = jsonDecode(response.body);
+    // final List<dynamic> foods = json["foods"];
+
+    final List<Product> suggestedProduct = [];
+
+    for (final food in foods) {
+      final String name = food["description"];
+      double protein = 0.0;
+      double fat = 0.0;
+      double carbohydrate = 0.0;
+      double calories = 0.0;
+      
+      for (final nutrient in food['foodNutrients']) {
+        switch (nutrient['nutrientName']) {
+          case 'Protein':
+            protein = (nutrient['value'] as num).toDouble();
+            break;
+          case 'Total lipid (fat)':
+            fat = (nutrient['value'] as num).toDouble();
+            break;
+          case 'Carbohydrate, by difference':
+            carbohydrate = (nutrient['value'] as num).toDouble();
+            break;
+          case 'Energy':
+            calories = (nutrient['value'] as num).toDouble();
+        }
+      }
+
+      final Product product = Product(name: name, calories: calories, protein: protein, fat: fat, carbohydrate: carbohydrate);
+      suggestedProduct.add(product);
+
+    }
+    suggestedProduct.sort((a, b) => b.protein.compareTo(a.protein));
+    return suggestedProduct.take(3).toList();
   }
 }

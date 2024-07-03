@@ -32,3 +32,13 @@ class Product {
     );
   }
 }
+
+class ProductRequest {
+  final String name;
+  final double weight;
+
+  const ProductRequest({
+    required this.name,
+    required this.weight,
+  });
+}

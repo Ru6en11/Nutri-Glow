@@ -9,3 +9,8 @@ abstract class ProductMapper {
         "weight": product.weight,
       };
 }
+
+abstract class ProductRequestMapper {
+  static ProductRequest fromJson(Map<String, dynamic> json) =>
+      ProductRequest(name: json["name"], weight: json["weight"]);
+}

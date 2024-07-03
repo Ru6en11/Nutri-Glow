@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
 import 'package:nutri_glow/domain/entities/product/product_gateway.dart';
-import 'package:nutri_glow/domain/entities/product/product_mapper.dart';
 import 'package:nutri_glow/domain/interactors/product_nutrition/product_nutrition_boundary.dart';
 import 'package:nutri_glow/domain/interactors/product_nutrition/product_nutrition_interactor.dart';
 

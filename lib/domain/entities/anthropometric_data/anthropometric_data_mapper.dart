@@ -16,12 +16,12 @@ abstract class AnthropometricDataMapper {
   static Map<String, dynamic> toJson(AnthropometricData data) =>
       <String, dynamic>{
         "user_id": data.userId,
-        "gender": data..gender,
+        "gender": data.gender.asString(),
         "age": data.age,
         "weight": data.weight,
         "height": data.height,
-        "activity_level": data.activityLevel,
-        "goal": data.goal,
+        "activity_level": data.activityLevel.asString(),
+        "goal": data.goal.asString(),
       };
     
   static Gender _parseGenderFromString(String parsedString) {

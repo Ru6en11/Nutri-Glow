@@ -4,7 +4,6 @@ import 'package:nutri_glow/domain/entities/anthropometric_data/anthropometric_da
 abstract class AnthropometricDataMapper {
   static AnthropometricData fromJson(Map<String, dynamic> json) =>
       AnthropometricData(
-        userId: json["user_id"] as String,
         gender: _parseGenderFromString(json["gender"] as String),
         age: json["age"] as int,
         weight: json["weight"] as int,
@@ -15,7 +14,6 @@ abstract class AnthropometricDataMapper {
 
   static Map<String, dynamic> toJson(AnthropometricData data) =>
       <String, dynamic>{
-        "user_id": data.userId,
         "gender": data.gender.asString(),
         "age": data.age,
         "weight": data.weight,

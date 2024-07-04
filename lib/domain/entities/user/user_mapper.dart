@@ -1,4 +1,5 @@
 import 'package:bcrypt/bcrypt.dart';
+import 'package:nutri_glow/domain/entities/anthropometric_data/anthropometric_data_mapper.dart';
 import 'package:nutri_glow/domain/entities/user/user.dart';
 
 abstract class UserMapper {
@@ -12,8 +13,10 @@ abstract class UserMapper {
         "id": user.id,
         "login": user.login,
         "password": user.hashedPassword,
+        if (user.anthropometricData != null)
+          "anthropometric_data": AnthropometricDataMapper.toJson(user.anthropometricData!),
       };
-  
+
   static String _hashPassword(String password) {
     final String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 

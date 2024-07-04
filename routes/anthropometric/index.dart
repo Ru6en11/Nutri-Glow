@@ -5,6 +5,8 @@ import 'package:dart_frog/dart_frog.dart';
 import 'package:nutri_glow/domain/entities/anthropometric_data/anthropometric_data.dart';
 import 'package:nutri_glow/domain/entities/anthropometric_data/anthropometric_data_mapper.dart';
 import 'package:nutri_glow/domain/entities/anthropometric_data/anthropometric_gateway.dart';
+import 'package:nutri_glow/domain/entities/user/user.dart';
+import 'package:nutri_glow/domain/entities/user/user_gateway.dart';
 
 Future<Response> onRequest(RequestContext context) {
   final HttpMethod method = context.request.method;
@@ -17,13 +19,19 @@ Future<Response> onRequest(RequestContext context) {
 
 Future<Response> _onPost(RequestContext context) async {
   final Map<String, dynamic> body = (await context.request.json()) as Map<String, dynamic>;
+  final String? userId = body["user_id"];
+  final Map<String, dynamic>? dataJson = body["data"];
 
-  final AnthropometricGateway anthropometricGateway = context.read<AnthropometricGateway>();
+  if (userId == null || dataJson == null) {
+    return Response(statusCode: HttpStatus.badRequest);
+  }
+
+  final UserGateway userGateway = context.read<UserGateway>();
 
   try {
 
-    final AnthropometricData data = AnthropometricDataMapper.fromJson(body);
-    anthropometricGateway.save(data);
+    final AnthropometricData data = AnthropometricDataMapper.fromJson(dataJson);
+    userGateway.changeAnthropometricDataById(userId, data);
 
     final Map<String, dynamic> json = AnthropometricDataMapper.toJson(data);
 

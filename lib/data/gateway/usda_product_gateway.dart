@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -7,6 +6,7 @@ import 'package:nutri_glow/config.dart';
 import 'package:nutri_glow/domain/entities/product/product_gateway.dart';
 import 'package:nutri_glow/domain/entities/product/product.dart';
 
+//TODO переписать этот класс
 class UsdaProductGateway implements ProductGateway {
   static const String _usdaBaseUrl = "https://api.nal.usda.gov/fdc/v1";
   final String _usdaKey = Config().usdaKey;
@@ -63,6 +63,7 @@ class UsdaProductGateway implements ProductGateway {
     return product;
   }
 
+  //TODO переписать поиск продуктов
   @override
   Future<List<Product>> findSomeByNutrient(String nutrient, double amount) async {
     final Uri url = Uri.parse(
@@ -107,7 +108,13 @@ class UsdaProductGateway implements ProductGateway {
       suggestedProduct.add(product);
 
     }
-    suggestedProduct.sort((a, b) => b.protein.compareTo(a.protein));
+    suggestedProduct.sort((a, b) => switch (nutrient) {
+      "proteint" => b.protein.compareTo(a.protein),
+      "fat" => b.protein.compareTo(a.protein),
+      "carbohydrate" => b.protein.compareTo(a.protein),
+      _ => throw Exception("Nutrien $nutrient not in pfc")
+    });
+
     return suggestedProduct.take(3).toList();
   }
 }

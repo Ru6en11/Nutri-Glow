@@ -105,7 +105,10 @@ class UsdaProductGateway implements ProductGateway {
       }
 
       final Product product = Product(name: name, calories: calories, protein: protein, fat: fat, carbohydrate: carbohydrate);
-      suggestedProduct.add(product);
+
+      final Product productByAmount = _getProductByAmount(nutrient, product, amount);
+
+      suggestedProduct.add(productByAmount);
 
     }
     suggestedProduct.sort((a, b) => switch (nutrient) {
@@ -116,5 +119,18 @@ class UsdaProductGateway implements ProductGateway {
     });
 
     return suggestedProduct.take(3).toList();
+  }
+
+  Product _getProductByAmount(String nutrient, Product product, double amount) {
+    final double multiply = switch (nutrient) {
+      "protein" => amount / product.protein,
+      "fat" => amount / product.protein,
+      "carbohydrate" => amount / product.protein,
+      _ => throw Exception("Nutrint $nutrient not in pfc"),
+    };
+
+    final Product productByAmount = product * multiply;
+
+    return productByAmount;
   }
 }

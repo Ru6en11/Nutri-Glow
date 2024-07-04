@@ -10,6 +10,9 @@ abstract class MealMapper {
     return <String, dynamic>{
       "name": meal.name,
       "calories": meal.calories,
+      "protein": meal.protein,
+      "fat": meal.fat,
+      "carbohydrate": meal.carbohydrate,
       "products": products,
     };
   }

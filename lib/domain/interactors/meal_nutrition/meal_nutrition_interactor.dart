@@ -13,9 +13,34 @@ class MealNutritionInteractor implements MealNutritionBoundary {
   Future<List<Map<String, dynamic>>> execute(List<MealRequest> _meals) async {
     final List<Map<String, dynamic>> mealsJson = [];
     for (final mealRequest in _meals) {
-      final List<Product> products = await _getProductsByProductRequests(mealRequest.products);
-      final double calories = products.map((p) => p.calories).toList().reduce((totalKcal, kcal) => totalKcal + kcal);
-      final Meal meal = Meal(name: mealRequest.name, calories: calories, products: products);
+      final List<Product> products =
+          await _getProductsByProductRequests(mealRequest.products);
+
+      final double calories = products
+          .map((p) => p.calories)
+          .toList()
+          .reduce((totalKcal, kcal) => totalKcal + kcal);
+      final double protein = products
+          .map((p) => p.protein)
+          .toList()
+          .reduce((totalProtein, protein) => totalProtein + protein);
+      final double fat = products
+          .map((p) => p.fat)
+          .toList()
+          .reduce((totalFat, fat) => totalFat + fat);
+      final double carbohydrate = products
+          .map((p) => p.carbohydrate)
+          .toList()
+          .reduce((totalCarb, carb) => totalCarb + carb);
+
+      final Meal meal = Meal(
+        name: mealRequest.name,
+        calories: calories,
+        protein: protein,
+        fat: fat,
+        carbohydrate: carbohydrate,
+        products: products,
+      );
 
       mealsJson.add(MealMapper.toJson(meal));
     }
@@ -27,10 +52,12 @@ class MealNutritionInteractor implements MealNutritionBoundary {
     List<ProductRequest> _products,
   ) async {
     final List<Product> products = [];
-    
+
     for (final productRequest in _products) {
-      final Product product = await _productGateway.findOneByName(productRequest.name);
-      final Product productByWeight = product / product.weight * productRequest.weight;
+      final Product product =
+          await _productGateway.findOneByName(productRequest.name);
+      final Product productByWeight =
+          product / product.weight * productRequest.weight;
 
       products.add(productByWeight);
     }

@@ -1,3 +1,4 @@
+import 'package:bcrypt/bcrypt.dart';
 import 'package:nutri_glow/domain/entities/user/user.dart';
 import 'package:nutri_glow/domain/entities/user/user_gateway.dart';
 import 'package:nutri_glow/domain/interactors/signin/signin_boundary.dart';
@@ -25,14 +26,21 @@ class SignInInteractor implements SignInBoundary {
     return token;
   }
 
+  // Здесь у пользователя пароль не хешированый
+  // Поэтому можем сделать проверку
+  // Оставил чисто для удобства, чтобы не делать много параметров для функции 
   bool _verifyUser(User _user) {
     final User? user = _userGateway.findOneById(_user.id);
 
-    if (user == null || user.password != _user.password) {
+    if (user == null || _verifyPassword(_user.hashedPassword, user.hashedPassword)) {
       
       return false;
     }
 
     return true;
+  }
+
+  bool _verifyPassword(String inputPassword, String hashedPassword) {
+    return BCrypt.checkpw(inputPassword, hashedPassword);
   }
 }

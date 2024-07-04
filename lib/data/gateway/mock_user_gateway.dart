@@ -12,7 +12,7 @@ class MockUserGateway implements UserGateway {
     return User(
       id: '1',
       login: 'login',
-      password: 'password',
+      hashedPassword: '\$2a\$10\$DCU6WnVZgxTK3p25EiCBve.GkhAI5a6HtZ81oe5VXG42Yu2Nhg3TC',
     );
   }
 
@@ -27,7 +27,7 @@ class MockUserGateway implements UserGateway {
   
   @override
   User findByLogin(String login) {
-    return User(id: 'id', login: 'login', password: 'password');
+    return User(id: 'id', login: 'login', hashedPassword: '\$2a\$10\$DCU6WnVZgxTK3p25EiCBve.GkhAI5a6HtZ81oe5VXG42Yu2Nhg3TC');
   }
 
 }

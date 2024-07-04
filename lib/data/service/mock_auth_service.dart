@@ -17,7 +17,7 @@ class AuthServiceImpl implements AuthService {
     return User(
       id: '1',
       login: login,
-      password: password,
+      hashedPassword: password,
     );
   }
 
